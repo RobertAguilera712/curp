@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <input type="text" placeholder="CURP" id="curp" style="text-transform: uppercase;"><br>
+    <span style="color:red;" id="spanCurp"></span><br>
+    <input type="text" placeholder="RFC" id="rfc" style="text-transform: uppercase;"><br>
+    <span style="color:red;" id="spanRFC"></span><br>
+    <button>Verificar</button>
+    <p>Edad: <span id="spanEdad"></span></p>
+    <script>
+        document.querySelector("button").addEventListener("click", e => {
+
+            let curp = document.getElementById('curp').value;
+            let rfc = document.getElementById('rfc').value;
+            let spanCurp = document.getElementById('spanCurp');
+            spanCurp.innerHTML = "";
+            let spanRfc = document.getElementById('spanRFC');
+            spanRfc.innerHTML = "";
+            if (curp.length != 18) {
+                spanCurp.appendChild(document.createTextNode("La curp debe de ser de 18 caracteres\n"))
+                spanCurp.appendChild(document.createElement("br"))
+            }
+            if (rfc.length != 13) {
+                spanRfc.appendChild(document.createTextNode("La rfc debe de ser de 13 caracteres\n"))
+                spanRfc.appendChild(document.createElement("br"))
+            }
+            let regex = /[a-zA-Z][a-zA-Z][a-zA-Z][a-zA-Z]/i;
+            primeros4curp = curp.substring(0, 5);
+            if (!regex.test(primeros4curp)) {
+                spanCurp.appendChild(document.createTextNode("Los primeros 4 caracteres deben de ser letras"))
+                spanCurp.appendChild(document.createElement("br"))
+            }
+            primeros4RFc = rfc.substring(0, 5);
+            if (!regex.test(primeros4RFc)) {
+                spanRfc.appendChild(document.createTextNode("Los primeros 4 caracteres deben de ser letras"))
+                spanRfc.appendChild(document.createElement("br"))
+            }
+            const codigosE =
+                ["AS",
+                    "BC",
+                    "BS",
+                    "CC",
+                    "CS",
+                    "CH",
+                    "DF",
+                    "CL",
+                    "CM",
+                    "DG",
+                    "GT",
+                    "GR",
+                    "HG",
+                    "JC",
+                    "MC",
+                    "MN",
+                    "MS",
+                    "NT",
+                    "NL",
+                    "OC",
+                    "PL",
+                    "QO",
+                    "QR",
+                    "SP",
+                    "SL",
+                    "SR",
+                    "TC",
+                    "TS",
+                    "TL",
+                    "VZ",
+                    "YN",
+                    "ZS"]
+            estadoCurp = curp.substring(11, 14).toUpperCase();
+            if (!codigosE.includes(estadoCurp)) {
+                spanCurp.appendChild(document.createTextNode("No es un código de estado válido"))
+                spanCurp.appendChild(document.createElement("br"))
+            }
+            let year = parseInt(curp.substring(4, 6))
+            if (isNaN(year)) {
+                spanCurp.appendChild(document.createTextNode("Año no válido"))
+                spanCurp.appendChild(document.createElement("br"))
+            } else if (!(year >= 50 || year <= 22)) {
+                spanCurp.appendChild(document.createTextNode("Año fuera de rango"))
+                spanCurp.appendChild(document.createElement("br"))
+            }
+            let mes = parseInt(curp.substring(6, 8))
+            if (isNaN(mes)) {
+                spanCurp.appendChild(document.createTextNode("Mes no válido"))
+                spanCurp.appendChild(document.createElement("br"))
+            } else if (!(mes >= 1 && mes <= 12)) {
+                spanCurp.appendChild(document.createTextNode("mes fuera de rango"))
+                spanCurp.appendChild(document.createElement("br"))
+            }
+            let meses30 = [4, 6, 8, 11];
+            let dia = parseInt(curp.substring(8, 10));
+            if (isNaN(dia)) {
+                spanCurp.appendChild(document.createTextNode("Día no válido"))
+                spanCurp.appendChild(document.createElement("br"))
+            } else if (meses30.includes(mes)) {
+                console.log("es mes con 30");
+                if (!(dia >= 1 && dia <= 30)) {
+                    spanCurp.appendChild(document.createTextNode("dia fuera de rango"))
+                    spanCurp.appendChild(document.createElement("br"))
+                }
+            } else if (mes == 2) {
+                if (year % 4 == 0) {
+                    if (!(dia >= 1 && dia <= 29)) {
+                        spanCurp.appendChild(document.createTextNode("dia fuera de rango"))
+                        spanCurp.appendChild(document.createElement("br"))
+                    }
+                } else {
+                    if (!(dia >= 1 && dia <= 28)) {
+                        spanCurp.appendChild(document.createTextNode("dia fuera de rango"))
+                        spanCurp.appendChild(document.createElement("br"))
+                    }
+                }
+            } else {
+                if (!(dia >= 1 && dia <= 31)) {
+                    spanCurp.appendChild(document.createTextNode("dia fuera de rango"))
+                    spanCurp.appendChild(document.createElement("br"))
+                }
+            }
+
+        });
+    </script>
+</body>
+
+</html>
