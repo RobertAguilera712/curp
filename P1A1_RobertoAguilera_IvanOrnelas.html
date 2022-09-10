@@ -1,17 +1,24 @@
 <!DOCTYPE html>
 <html lang="en">
-
+<!--
+    + Autores:
+    - Roberto Carlos Aguilera Alcantar
+    - Iván Moisés Ornelas Meza
+    + Asignatura:
+    - Arquitectura de Software
+    Actividad: P1A1. Validación CURP-RFC
+-->
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Validación</title>
 </head>
 
 <body>
-    <input type="text" placeholder="CURP" id="curp" style="text-transform: uppercase;"><br>
+    <input type="text" placeholder="CURP" id="curp" style="text-transform: uppercase;" maxlength="18"><br>
     <span style="color:red;" id="spanCurp"></span><br>
-    <input type="text" placeholder="RFC" id="rfc" style="text-transform: uppercase;"><br>
+    <input type="text" placeholder="RFC" id="rfc" style="text-transform: uppercase;" maxlength="13"><br>
     <span style="color:red;" id="spanRFC"></span><br>
     <button>Verificar</button>
     <p><span style="color:red;" id="spanCoincidencia"></span></p>
